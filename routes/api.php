@@ -17,11 +17,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group([
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('register', 'AuthController@register');
+});
+
 Route::resource('students', 'StudentController');
 
-
+/*
 Route::middleware(['basicAuth'])->group(function () {
     //All the routes are placed in here
     //Route::get('/', 'LoginController@index');
     Route::get('/home', 'StudentController@student');
-});
+});*/
